@@ -2,7 +2,7 @@ package com.quyet.osahan_eat.entity;
 
 import jakarta.persistence.*;
 
-@Table
+@Table(name = "menurestaurant")
 @Entity(name = "MenuRestaurant")
 public class MenuRestaurant {
     @Id

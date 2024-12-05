@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Table
+@Table(name = "Food")
 @Entity(name = "Food")
 public class Food {
     @Id
@@ -15,7 +15,7 @@ public class Food {
     @Column(name = "title", length = 255)
     private String title;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "TEXT")
     private String image;
 
     @Column(name = "time_ship", length = 10)

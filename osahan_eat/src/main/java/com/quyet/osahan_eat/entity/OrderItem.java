@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Table
-@Entity(name = "OrderItem")
+@Table(name = "orderitem")
+@Entity(name = "orderitem")
 public class OrderItem {
     @Id
     @Column(name = "order_id")

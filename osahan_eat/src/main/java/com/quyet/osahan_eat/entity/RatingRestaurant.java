@@ -2,8 +2,8 @@ package com.quyet.osahan_eat.entity;
 
 import jakarta.persistence.*;
 
-@Table
-@Entity(name = "RatingRestaurant")
+@Table(name = "ratingrestaurant")
+@Entity
 public class RatingRestaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

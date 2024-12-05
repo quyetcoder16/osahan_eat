@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Table
+@Table(name = "Restaurant")
 @Entity(name = "Restaurant")
 public class Restaurant {
 
