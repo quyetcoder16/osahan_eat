@@ -19,7 +19,7 @@ create table Users(
     role_id int,
     primary key(id)
 );
-
+//
 create table RatingFood(
 	id int auto_increment,
     user_id int,
@@ -47,6 +47,7 @@ create table Food(
     primary key(id)
 );
 
+
 create table RatingRestaurant(
 	id int auto_increment,
     user_id int,
@@ -57,7 +58,7 @@ create table RatingRestaurant(
     primary key(id)
 );
 
-
+//
 create table Orders(
 	id int auto_increment,
     user_id int,
@@ -66,6 +67,7 @@ create table Orders(
     primary key(id)
 );
 
+//
 create table MenuRestaurant(
 	cate_id int,
     res_id int,
@@ -73,6 +75,7 @@ create table MenuRestaurant(
     
     primary key(res_id,cate_id)
 );
+ 
 
 create table Restaurant(
 	id int auto_increment,
