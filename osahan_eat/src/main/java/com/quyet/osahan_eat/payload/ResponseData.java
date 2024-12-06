@@ -2,10 +2,19 @@ package com.quyet.osahan_eat.payload;
 
 public class ResponseData {
     private int status = 200;
+    private boolean success = true;
     private String message;
     private Object data;
 
     public ResponseData() {
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public ResponseData(int status, String message, Object data) {
