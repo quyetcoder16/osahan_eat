@@ -8,12 +8,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +23,9 @@ public class SecurityConfig {
     // Inject CustomUserDetailService để load thông tin người dùng từ cơ sở dữ liệu
     @Autowired
     private CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    private CustomJwtFilter customJwtFilter;
 
     /**
      * Cấu hình AuthenticationManager:
@@ -58,13 +63,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable() // Tắt bảo vệ CORS (nếu cần dùng, nên cấu hình riêng)
                 .csrf().disable() // Tắt bảo vệ CSRF (cẩn trọng khi tắt CSRF)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeHttpRequests() // Cấu hình quyền truy cập cho các request HTTP
                 .requestMatchers("/login/**") // Các URL bắt đầu bằng "/login"
                 .permitAll() // Cho phép truy cập mà không cần xác thực
                 .anyRequest() // Mọi request khác
-                .authenticated() // Phải được xác thực
-                .and()
-                .httpBasic(); // Sử dụng xác thực HTTP Basic
+                .authenticated(); // Phải được xác thực
+        http.addFilterBefore(customJwtFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build(); // Trả về SecurityFilterChain đã cấu hình
     }
 
