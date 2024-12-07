@@ -66,7 +66,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests() // Cấu hình quyền truy cập cho các request HTTP
-                .requestMatchers("/login/**") // Các URL bắt đầu bằng "/login"
+                .requestMatchers("/login/**","/restaurant/files/**") // Các URL bắt đầu bằng "/login"
                 .permitAll() // Cho phép truy cập mà không cần xác thực
                 .anyRequest() // Mọi request khác
                 .authenticated(); // Phải được xác thực
